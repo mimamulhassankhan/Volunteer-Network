@@ -33,7 +33,10 @@ const VolunteerRegisterList = () => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                if(data.status === 'success'){
+                    const remaining = registrationList.filter(reg => reg._id !== id);
+                    setRegistrationList(remaining);
+                }
             })
         }
         fetchOpertaion();

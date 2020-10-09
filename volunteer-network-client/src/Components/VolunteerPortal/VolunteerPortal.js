@@ -7,6 +7,27 @@ import AppBar from '../AppBar/AppBar';
 const VolunteerPortal = ({user, loading, events}) => {
     const [userEvents, setUserEvents] = useState([]);
 
+    const handleDeleteEntry = id => {
+        console.log(id);
+        const fetchOpertaion = async () => {
+            await fetch('http://localhost:5000/deleteRegistration/'+id,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Bearer ${sessionStorage.getItem('token')}`
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === 'success'){
+                    const remaining = userEvents.filter(reg => reg._id !== id);
+                    setUserEvents(remaining);
+                }
+            })
+        }
+        fetchOpertaion();
+    }
+
     useEffect(() => {
         const fetchOpertaion = async () => {
             await fetch('http://localhost:5000/events?email='+user.email,{
@@ -52,7 +73,7 @@ const VolunteerPortal = ({user, loading, events}) => {
                                 <div className="d-flex flex-column flex-fill">
                                     <h4>{evnt.eventName}</h4>
                                     <h6>{evnt.date}</h6>
-                                    <Button variant="danger" className=" align-self-end">Cencel</Button>
+                                    <Button onClick={() => handleDeleteEntry(evnt._id)} variant="danger" className=" align-self-end">Cencel</Button>
                                 </div>
                             </div>
                         </Card>)
