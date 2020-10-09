@@ -8,7 +8,7 @@ const VolunteerRegisterList = () => {
     
     useEffect(() => {
         const fetchOpertaion = async () => {
-            await fetch('http://localhost:5000/getRegistrations',{
+            await fetch('https://stormy-peak-51840.herokuapp.com/getRegistrations',{
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ const VolunteerRegisterList = () => {
 
     const handleDeleteEntry = id => {
         const fetchOpertaion = async () => {
-            await fetch('http://localhost:5000/deleteRegistration/'+id,{
+            await fetch('https://stormy-peak-51840.herokuapp.com/deleteRegistration/'+id,{
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

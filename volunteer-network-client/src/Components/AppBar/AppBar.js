@@ -28,7 +28,7 @@ const AppBar = ({user, addLoggedinUser}) => {
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end font-weight-bold">
                         <Navbar.Text>
-                            <Nav.Link href={`/`}>Home</Nav.Link>
+                            <Link className="nav-link" to={`/`}>Home</Link>
                         </Navbar.Text>
                         <Navbar.Text>
                             <Nav.Link>Donation</Nav.Link>
@@ -46,12 +46,15 @@ const AppBar = ({user, addLoggedinUser}) => {
                                 <Nav.Link>{user.displayName}</Nav.Link>
                             </Navbar.Text>
                             <Navbar.Text>
+                               <Link to={`/dashboard`} className="nav-link">My Events</Link>
+                            </Navbar.Text>
+                            <Navbar.Text>
                                 <Nav.Link><Button onClick={signOut} className="font-weight-bold" variant="warning">Sign Out</Button></Nav.Link>
                             </Navbar.Text>
                             </>:
                             <>
                             <Navbar.Text>
-                                <Nav.Link href={`/dashboard`}><Button className="font-weight-bold" variant="primary">My Registrations</Button></Nav.Link>
+                               <Link to={`/dashboard`} className="nav-link"><Button className="font-weight-bold" variant="primary">My Registrations</Button></Link>
                             </Navbar.Text>
                             <Navbar.Text>
                                 <Nav.Link href={`/admin`}><Button className="font-weight-bold" variant="secondary">Admin</Button></Nav.Link>

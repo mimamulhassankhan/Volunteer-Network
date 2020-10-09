@@ -17,7 +17,7 @@ function App({ fetchEventsData, fetchEventsSuccess, fetchEventsFailure}) {
   useEffect(() => {
         const fetchOpertaion = async () => {
           fetchEventsData();
-          await fetch('http://localhost:5000/getEvents')
+          await fetch('https://stormy-peak-51840.herokuapp.com/getEvents')
           .then(res => res.json())
           .then(data =>{
               fetchEventsSuccess(data);
@@ -50,9 +50,6 @@ function App({ fetchEventsData, fetchEventsSuccess, fetchEventsFailure}) {
         </PrivateRoute>
         <PrivateRoute path="/admin">
           <AdminDashboardNav/>
-        </PrivateRoute>
-        <PrivateRoute path="/dashboard/:user">
-          <VolunteerPortal />
         </PrivateRoute>
         <Route path="*">
           <NotFound/>

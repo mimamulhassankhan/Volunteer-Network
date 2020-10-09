@@ -15,13 +15,14 @@ const RegisterToEvent = ({user, events}) => {
         email: user.email,
         date: toEvent.date,
         description: '',
-        eventName: toEvent.title
+        eventName: toEvent.title,
+        eventId: toEvent._id
     })
 
     const handleSubmit = (event) => {
         event.preventDefault();
         if(registrationData.eventName && registrationData.date && registrationData.name && registrationData.email && registrationData.description) {
-            fetch('http://localhost:5000/registration',{
+            fetch('https://stormy-peak-51840.herokuapp.com/registration',{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(registrationData)
@@ -29,7 +30,7 @@ const RegisterToEvent = ({user, events}) => {
             .then(res => res.json())
             .then(data => {
                 if(data.status === 'success') {
-                    history.push(`/dashboard/${user.email}`)
+                    history.push(`/dashboard`)
                 }
                 else{
                     prompt(data.message);

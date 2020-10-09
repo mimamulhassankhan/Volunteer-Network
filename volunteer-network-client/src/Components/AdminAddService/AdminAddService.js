@@ -19,7 +19,7 @@ const AdminAddService = () => {
         data.append('banner', serviceData.banner);
 
 
-        fetch('http://localhost:5000/addService', {
+        fetch('https://stormy-peak-51840.herokuapp.com/addService', {
             method: 'POST',
             body: data
         })

@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <>
             <Helmet>
-                <style>{'body { background-image: url("/images/Mask Group.png"); background-size : 100vw 80vh; background-repeat: no-repeat; }'}</style>
+                <style>{'body { background-image: url("/images/Mask Group.png"); background-size : 100vw 480px; background-repeat: no-repeat; }'}</style>
             </Helmet>
             <AppBar />
             <TopHeader />

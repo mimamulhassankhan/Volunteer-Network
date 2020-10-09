@@ -7,10 +7,31 @@ import AppBar from '../AppBar/AppBar';
 const VolunteerPortal = ({user, loading, events}) => {
     const [userEvents, setUserEvents] = useState([]);
 
-    const handleDeleteEntry = id => {
-        console.log(id);
+    useEffect(() => {
         const fetchOpertaion = async () => {
-            await fetch('http://localhost:5000/deleteRegistration/'+id,{
+            await fetch('https://stormy-peak-51840.herokuapp.com/events?email='+user.email,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Bearer ${sessionStorage.getItem('token')}`
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                data && data.map(dt => {
+                    const item =  events && events.filter(evnt => evnt._id === dt.eventId)[0];
+                    if(item) dt.photo = item.photo;
+                    return dt;
+                })
+                setUserEvents(data);
+            });
+        }
+        fetchOpertaion();
+    }, [user, events]);
+
+    const handleDeleteEntry = id => {
+        const fetchOpertaion = async () => {
+            await fetch('https://stormy-peak-51840.herokuapp.com/deleteRegistration/'+id,{
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -28,28 +49,6 @@ const VolunteerPortal = ({user, loading, events}) => {
         fetchOpertaion();
     }
 
-    useEffect(() => {
-        const fetchOpertaion = async () => {
-            await fetch('http://localhost:5000/events?email='+user.email,{
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    authorization: `Bearer ${sessionStorage.getItem('token')}`
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                data && data.map(dt => {
-                    const item = events.filter(evnt => evnt.eventName === dt.eventName)[0];
-                    console.log(item);
-                    if(item) dt.photo = item.photo;
-                    return dt;
-                })
-                setUserEvents(data);
-            });
-        }
-        fetchOpertaion();
-    }, [user, events]);
 
     return (
         <>
@@ -70,7 +69,7 @@ const VolunteerPortal = ({user, loading, events}) => {
                                 <div>
                                     <Card.Img style={{width: '130px', height: '150px'}} src={`data:${evnt.photo?.contentType};base64,${evnt.photo?.image}`} />
                                 </div>
-                                <div className="d-flex flex-column flex-fill">
+                                <div className=" ml-2 d-flex flex-column flex-fill">
                                     <h4>{evnt.eventName}</h4>
                                     <h6>{evnt.date}</h6>
                                     <Button onClick={() => handleDeleteEntry(evnt._id)} variant="danger" className=" align-self-end">Cencel</Button>
