@@ -70,6 +70,10 @@ const VolunteerRegisterList = () => {
                     }
                 </tbody>
                 </Table>
+                {
+                        registrationList.length === 0 && 
+                        <h1 class="text-success text-center">No Users</h1>
+                }
         </>
     );
 };

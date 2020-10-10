@@ -63,6 +63,10 @@ const VolunteerPortal = ({user, loading, events}) => {
             <Container>
                 <div className="d-flex flex-wrap justify-content-center align-items-center">
                     {
+                        userEvents && userEvents.length === 0 && !loading &&
+                        <h1 className="text-danger">Nothing to show. Register an event.</h1>
+                    }
+                    {
                         userEvents && userEvents.map(evnt => 
                         <Card key={evnt._id} bg="light" text="dark" className="m-1" style={{width:'45%'}}>
                             <div className="d-flex justify-content-around align-content-between align-items-start blockquote mb-0 card-body">
